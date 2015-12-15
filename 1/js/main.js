@@ -10,6 +10,3 @@ btn.addEventListener("click", function () {
 	bar.style.width = result;
 }
 );
-
-
-
