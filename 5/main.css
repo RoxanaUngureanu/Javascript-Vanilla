@@ -1,0 +1,30 @@
+input[type="range"] {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-appearance: none;
+    appearance: none;
+    -moz-appearance: none;
+    border-radius: 5px;
+   	border:1px solid black;
+    height: 5px;
+    width: 200px;
+    outline:none;
+}
+input[type='range']::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        border-radius: 10px;
+        background-color: gray;
+        height: 15px;
+        width: 15px;
+}
+output {
+    width: 50px;
+    height: 20px;
+    border: 1px solid black;
+    display: inline-block;
+    vertical-align: middle;
+}
+.red, .green, .blue {
+    clear: both;
+    margin: 20px;
+}
