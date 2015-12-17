@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="main.css">
+	</head>
+	<body>
+		<script type="text/html" id="msg_template">
+			<div class="msg-box">
+					<img src="http://orig15.deviantart.net/ff6c/f/2013/220/7/d/jon_and_ghost_avatar_by_acidkitty3-d6h6ppn.gif"/>
+				<p id="para"><%=message%></p>
+				<p id="name">Jon Snow</p>
+			</div>
+		</script>
+
+		<div id="container"></div>
+
+		<form id="form">
+			<input type="text" placeholder="Text Message" id="message"/>
+			<input type="submit" value="Send" id="btn"/>
+		</form>
+		<p id="warning">Empty msg!</p>
+
+		<script src="main.js"></script>
+	</body>
+</html>

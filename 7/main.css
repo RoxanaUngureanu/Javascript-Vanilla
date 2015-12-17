@@ -1,0 +1,53 @@
+#container {
+    height:300px;
+    width:300px;
+    overflow-y:scroll;
+    border:2px solid black;
+}
+
+input {
+    display:inline-block;
+    outline:none;
+    margin-top:20px;
+}
+#message{
+    width:250px;
+}
+
+.msg-box {
+    display:inline-block;
+    width:250px;
+    height:auto;
+    display:inline-block;
+    border:2px solid lightgray;
+    text-align:center;
+    margin:10px;
+    word-wrap:break-word;
+
+}
+img {
+    display:inline-block;
+    float:left;
+}
+
+#name {
+    display:inline-block;
+    font-size: 20px ;
+    font-weight: 600;
+    background-color: lightgray;
+    color:gray;
+    float:right;
+    margin-right:10px;
+    padding:5px;
+}
+#warning {
+    display:inline-block;
+    width:100px;
+    height:20px;
+    color:white;
+    background-color:red;
+    text-align:center;
+    text-transform:uppercase;
+    padding:5px;
+    display:none;
+}
