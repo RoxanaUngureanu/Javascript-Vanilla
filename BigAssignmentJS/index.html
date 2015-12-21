@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Big Assignment</title>
+    <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"  href="css/main.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <form>
+                    <div class="form-group">
+                        <label for="inputName">Name:<span id="warn1"> Name should have at least 2 characters!</span></label>
+                        <input type="text" id="inputName" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputCity">City visited:<span id="warn2"> City should have at least 2 characters!</span></label>
+                        <input type="text" id="inputCity" class="form-control"/>
+                    </div>
+                    <p>Rating:<span id="warn3"> The rating should include at least one value!</span></p>
+                    <div class="stele" >
+                        <span class="star glyphicon glyphicon-star" data-value="1" ></span>
+                        <span class="star glyphicon glyphicon-star" data-value="2" ></span>
+                        <span class="star glyphicon glyphicon-star" data-value="3" ></span>
+                        <span class="star glyphicon glyphicon-star" data-value="4" ></span>
+                        <span class="star glyphicon glyphicon-star" data-value="5" ></span>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" checked>More than a weekend</label>
+                    </div>
+                    <input type="submit" class="btn btn-primary" id="addBtn" value="Add!"/>
+                </form>
+            </div>
+            <script type="text/html" id="tpl">
+                <td><%=messageName%></td>
+                <td><%=messageCity%></td>
+                <td id="rating"><%=messageRating%>/5</td>
+                <td><a href="#" class="rmvBtn">Remove</a></td>
+            </script>
+            <div class="col-md-4">
+                <table class="table table-bordered" id="the-table">
+                    <thead>
+                    <tr>
+                            <th><span class="glyphicon glyphicon-triangle-bottom"></span> Name</th>
+                            <th><span class="glyphicon glyphicon-triangle-bottom"></span> City</th>
+                            <th><span class="glyphicon glyphicon-triangle-bottom"></span> Rating</th>
+                            <th><span class="glyphicon glyphicon-triangle-bottom"></span> Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ionut</td>
+                            <td>Bucuresti</td>
+                            <td id="rating">3/5</td>
+                            <td><a href="#" class="rmvBtn">Remove</a></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                         <tr>
+                             <td>Total: <span id="total"></span> </td>
+                             <td colspan="3">Avg.Rating:  <span id="avgRating"></span>/5</td>
+                         </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="col-md-4">
+                <img src="http://i.stack.imgur.com/lDxIA.png" class="img-responsive" alt="Map">
+            </div>
+        </div>
+    </div>
+    <script src="js/template-engine.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
