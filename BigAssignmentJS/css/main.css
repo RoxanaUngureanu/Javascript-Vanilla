@@ -21,9 +21,9 @@ thead {
 
     text-align: center;
 }
-tbody tr:nth-child(even) {
-    background-color:lightgray;
-}
+/*tbody tr:nth-child(even) {*/
+    /*background-color:lightgray;*/
+/*}*/
 .glyphicon-triangle-bottom:before {
     font-size: 10px;
 }

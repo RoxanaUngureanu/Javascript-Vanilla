@@ -28,6 +28,7 @@
                         <span class="star glyphicon glyphicon-star" data-value="4" ></span>
                         <span class="star glyphicon glyphicon-star" data-value="5" ></span>
                     </div>
+                    <input type="hidden" id="rating" value=""/>
                     <div class="checkbox">
                         <label><input type="checkbox" checked>More than a weekend</label>
                     </div>
@@ -35,13 +36,15 @@
                 </form>
             </div>
             <script type="text/html" id="tpl">
-                <td><%=messageName%></td>
-                <td><%=messageCity%></td>
-                <td id="rating"><%=messageRating%>/5</td>
-                <td><a href="#" class="rmvBtn">Remove</a></td>
+                <tr>
+                    <td><%=messageName%></td>
+                    <td><%=messageCity%></td>
+                    <td id="rating"><%=messageRating%>/5</td>
+                    <td><a href="#" class="rmvBtn">Remove</a></td>
+                </tr>
             </script>
             <div class="col-md-4">
-                <table class="table table-bordered" id="the-table">
+                <table class="table table-bordered table-striped" id="the-table">
                     <thead>
                     <tr>
                             <th><span class="glyphicon glyphicon-triangle-bottom"></span> Name</th>
@@ -51,12 +54,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Ionut</td>
-                            <td>Bucuresti</td>
-                            <td id="rating">3/5</td>
-                            <td><a href="#" class="rmvBtn">Remove</a></td>
-                        </tr>
+                        <!--<tr>-->
+                            <!--<td>Ionut</td>-->
+                            <!--<td>Bucuresti</td>-->
+                            <!--<td id="rating">3/5</td>-->
+                            <!--<td><a href="#" class="rmvBtn">Remove</a></td>-->
+                        <!--</tr>-->
                     </tbody>
                     <tfoot>
                          <tr>
