@@ -6,6 +6,10 @@
     <title>Big Assignment</title>
     <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" type="text/css"  href="css/main.css">
+    <style type="text/css">
+        html, body { height: 100%; margin: 0; padding: 0; }
+        #map { height: 300px; }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -13,14 +17,16 @@
             <div class="col-md-4">
                 <form>
                     <div class="form-group">
-                        <label for="inputName">Name:<span id="warn1"> Name should have at least 2 characters!</span></label>
+                        <label for="inputName">Name:</label>
                         <input type="text" id="inputName" class="form-control"/>
+                        <span id="warn1"> Name should have at least 2 characters!</span>
                     </div>
                     <div class="form-group">
-                        <label for="inputCity">City visited:<span id="warn2"> City should have at least 2 characters!</span></label>
+                        <label for="inputCity">City visited:</label>
                         <input type="text" id="inputCity" class="form-control"/>
+                        <span id="warn2"> City should have at least 2 characters!</span>
                     </div>
-                    <p>Rating:<span id="warn3"> The rating should include at least one value!</span></p>
+                    <p>Rating:</p>
                     <div class="stele" >
                         <span class="star glyphicon glyphicon-star" data-value="1" ></span>
                         <span class="star glyphicon glyphicon-star" data-value="2" ></span>
@@ -28,6 +34,7 @@
                         <span class="star glyphicon glyphicon-star" data-value="4" ></span>
                         <span class="star glyphicon glyphicon-star" data-value="5" ></span>
                     </div>
+                    <span id="warn3"> The rating should include at least one value!</span>
                     <input type="hidden" id="rating" value=""/>
                     <div class="checkbox">
                         <label><input type="checkbox" checked>More than a weekend</label>
@@ -69,12 +76,13 @@
                     </tfoot>
                 </table>
             </div>
-            <div class="col-md-4">
-                <img src="http://i.stack.imgur.com/lDxIA.png" class="img-responsive" alt="Map">
-            </div>
+            <div class="col-md-4" id="map"></div>
         </div>
     </div>
     <script src="js/template-engine.js"></script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAorlvqdz5vGHbc_1MglL59zfOLrYzmzcY&callback=initMap">
+    </script>
     <script src="js/main.js"></script>
 </body>
 </html>

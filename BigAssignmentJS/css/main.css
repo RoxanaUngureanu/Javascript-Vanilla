@@ -29,9 +29,8 @@ thead {
 }
 .container {
     margin-top: 5%;
-    background-color:whitesmoke;
-    border:2px solid lightgray;
-
+    padding-bottom: 5%;
+    background-color:ghostwhite;
 }
 .row {
     padding-top: 6%;
