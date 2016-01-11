@@ -15,20 +15,29 @@ thead {
 }
 
 .star {
-    font-size: 20px;
+    font-size: 35px;
+    cursor: pointer;
 }
-
+.star.hover {
+    color: gold;
+}
 .row {
     padding-top: 5%;
     padding-bottom: 5%
 }
+
+#the-form .editing,
+#the-form.editing .adding{
+    display:none;
+}
+#the-form.editing .editing{
+    display:block;
+}
 /*----------------------LOADING SIGN---------------------------------*/
-#circularG{
-    position:relative;
-    width:49px;
-    height:49px;
-    margin: auto;
-    float: right;
+#loading{
+   width:70px;
+    height:70px;
+    float:right;
 }
 
 .circularG{

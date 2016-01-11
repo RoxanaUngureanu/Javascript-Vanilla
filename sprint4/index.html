@@ -13,53 +13,43 @@
     <div class="container">
         <div class="row">
             <div class="col-md-11">
-                <div id="circularG">
-                    <div id="circularG_1" class="circularG"></div>
-                    <div id="circularG_2" class="circularG"></div>
-                    <div id="circularG_3" class="circularG"></div>
-                    <div id="circularG_4" class="circularG"></div>
-                    <div id="circularG_5" class="circularG"></div>
-                    <div id="circularG_6" class="circularG"></div>
-                    <div id="circularG_7" class="circularG"></div>
-                    <div id="circularG_8" class="circularG"></div>
-                </div>
+                <img src="http://www.fontsquirrel.com/presentation_20150827/theme_site/images/ajax_loader_blue_512.gif" alt="Loading..." id="loading"/>
             </div>
             <div class="col-md-4">
-              <form>
+              <form id="the-form">
                   <div class="form-group">
                       <label for="inputCity">City</label>
                       <input type="text" id="inputCity"  name="city" placeholder="Enter a city" class="form-control"/>
                   </div>
                   <p>Stars</p>
-                  <div class="stele" >
-                      <span class="star glyphicon glyphicon-star" data-value="1" ></span>
-                      <span class="star glyphicon glyphicon-star" data-value="2" ></span>
-                      <span class="star glyphicon glyphicon-star" data-value="3" ></span>
-                      <span class="star glyphicon glyphicon-star" data-value="4" ></span>
-                      <span class="star glyphicon glyphicon-star" data-value="5" ></span>
-                  </div>
-                  <input type="hidden" value=""/>
+                  <input type="text" name="stele" value=""/>
                   <div class="checkbox">
                     <label><input type="checkbox" name="visited">Visited</label>
                   </div>
-                  <input type="submit" value="Save"  class="btn btn-primary "/>
+                  <div class="adding">
+                      <input type="submit" value="Save"  class="btn btn-primary save"/>
+                  </div>
+                  <div class="editing">
+                      <input type="submit" value="Update"  class="btn btn-primary update"/>
+                      <a href="#"  class="btn btn-primary btn-warning cancel">Cancel</a>
+                  </div>
               </form>
             </div>
             <script type="text/html" id="tpl">
                 <tr data-id="<%=id%>">
-                    <td><%=city%></td>
+                    <td><%=name%></td>
                     <td id="stars"><%=stars%></td>
                     <td><%=visited%></td>
                     <td>
                         <div class="btn-group" role="group">
-                            <a href="#"  class="btn btn-default">Edit</a>
+                            <a href="#"  class="btn btn-default edit">Edit</a>
                             <a href="#" class="btn btn-default btn-danger delete">Delete</a>
                         </div>
                     </td>
                 </tr>
             </script>
             <div class="col-md-6">
-              <table class="table table-bordered table-striped">
+              <table class="table table-bordered table-striped" id="the-table">
                   <thead>
                       <tr>
                           <th>City <i class="fa fa-fw fa-sort-asc"></i></th>
@@ -75,7 +65,7 @@
                           <td></td>
                           <td>
                               <div class="btn-group" role="group">
-                                  <a href="#"  class="btn btn-default">Edit</a>
+                                  <a href="#"  class="btn btn-default edit">Edit</a>
                                   <a href="#" class="btn btn-default btn-danger delete">Delete</a>
                               </div>
                           </td>
@@ -85,22 +75,12 @@
             </div>
             <div class="col-md-6">
                 <nav>
-                    <ul class="pagination">
-                        <li>
-                            <a href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
+                    <ul class="pagination pagination-centered">
+                        <li><a href="#">Previous</a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li class="disabled"><a href="#">of</a></li>
                         <li><a href="#">5</a></li>
-                        <li>
-                            <a href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
+                        <li><a href="#">Next</a></li>
                     </ul>
                 </nav>
                </div>
@@ -109,6 +89,8 @@
     <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
     <script src="js/store.js"></script>
     <script src="js/template-engine.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/stars.jquery.js"></script>
+    <script src="js/confirm.jquery.js"></script>
+    <script src="js/main2.js"></script>
 </body>
 </html>
