@@ -1,19 +1,32 @@
 var store = (function () {
     // private
+
     var entriesUrl = "http://server.godev.ro:8080/api/roxanau/entries";
     var headers = {
         'Content-Type': 'application/json'
     };
 
+    var error = function(jqXHR){
+
+        if (jqXHR.status === 409){
+
+            alert(jqXHR.responseJSON.error);
+
+        } else {
+
+            alert("Error unknown");
+        }
+    };
+
     return {
-        getAll: function () {
+        getAll: function (page) {
             return new Promise(function (resolve, reject) {
-                $.ajax(entriesUrl, {
+                $.ajax(entriesUrl + "?page=" + page, {
                     type: 'GET',
                     headers: headers
                 }).done(function (data) {
-                    resolve(data.list);
-                });
+                    resolve(data);
+                }).fail(error);
             });
         },
         get: function (id) {
@@ -24,7 +37,7 @@ var store = (function () {
                     data: JSON.stringify(id)
                 }).done(function (data) {
                     resolve(data);
-                });
+                }).fail(error);
             });
         },
         add: function (item) {
@@ -35,7 +48,7 @@ var store = (function () {
                         data: JSON.stringify(item)
                     }).done(function (data) {
                         resolve(data);
-                    });
+                    }).fail(error);
             });
         },
         update: function (id, updateData) {
@@ -46,7 +59,7 @@ var store = (function () {
                     data: JSON.stringify(updateData)
                 }).done(function (data) {
                     resolve(data);
-                });
+                }).fail(error);
             });
         },
         delete: function (id) {
@@ -56,7 +69,7 @@ var store = (function () {
                     headers: headers
                 }).done(function () {
                     resolve();
-                });
+                }).fail(error);
             });
         }
     };

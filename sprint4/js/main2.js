@@ -2,17 +2,23 @@ var $form = $('#the-form');
 var $table = $('#the-table');
 var $tbody = $table.find('tbody');
 var editingItem = null;
+var page = 1;
+var totalPages = 1;
 
 var drawTable = function(store) {
 
-    store.getAll().then(function(data){
+    store.getAll(page).then(function(data){
         $tbody.empty();
-        $.each(data, function() {
+        $.each(data.list, function() {
             var tr = (tmpl("tpl", this));
             $tbody.append(tr);
         });
+        totalPages = data.totalPages;
+        $('#page').text(page);
+        $('#totalPages').text(totalPages);
         attachTableEvents();
     });
+
 };
 
 var onSubmit = function() {
@@ -82,9 +88,31 @@ var resetForm = function (){
     $('input[name="visited"]').prop('checked', false);
 };
 
+var nextClicked = function(){
+
+            if (page < totalPages) {
+                page++;
+                drawTable(store);
+            }
+
+            return false;
+};
+var prevClicked = function() {
+
+        if (page > 1) {
+            page--;
+            drawTable(store);
+        }
+
+        return false;
+};
+
 $(document).ready(function() {
     $form.submit(onSubmit);
     $form.find('a.cancel').click(cancelClicked);
     $('[name="stele"]').stars();
+    $('a.previous').click(prevClicked);
+    $('a.next').click(nextClicked);
     drawTable(store);
 });
+
