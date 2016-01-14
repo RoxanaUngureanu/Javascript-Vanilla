@@ -4,10 +4,12 @@ var $tbody = $table.find('tbody');
 var editingItem = null;
 var page = 1;
 var totalPages = 1;
+var sortField = 'name';
+var sortDir = 'asc';
 
 var drawTable = function(store) {
 
-    store.getAll(page).then(function(data){
+    store.getAll(page,sortField,sortDir).then(function(data){
         $tbody.empty();
         $.each(data.list, function() {
             var tr = (tmpl("tpl", this));
@@ -34,13 +36,14 @@ var onSubmit = function() {
             $form.removeClass("editing");
             drawTable(store);
         });
+
     } else {
 
         store.add(formData).then(function() {
             drawTable(store);
+
         });
     }
-
     resetForm();
 
     return false;
@@ -70,6 +73,8 @@ var editClicked = function() {
         $('input[name="city"]').val(data.name);
         $('input[name="visited"]').prop("checked", data.visited);
         $('input[name="stele"]').val(data.stars).change();
+
+        return false;
     });
 
     return false;
@@ -86,6 +91,7 @@ var resetForm = function (){
     $('#inputCity').val('');
     $('input[name="stele"]').val('').change();
     $('input[name="visited"]').prop('checked', false);
+    editingItem = null;
 };
 
 var nextClicked = function(){
@@ -97,6 +103,7 @@ var nextClicked = function(){
 
             return false;
 };
+
 var prevClicked = function() {
 
         if (page > 1) {
@@ -106,13 +113,60 @@ var prevClicked = function() {
 
         return false;
 };
+var error = function(jqXHR){
 
+    if (jqXHR.status === 409){
+
+        alert(jqXHR.responseJSON.error);
+
+    } else {
+
+        alert("Error unknown");
+    }
+};
+
+var direction = function (header){
+
+    if (sortDir == 'asc') {
+        sortDir = 'desc';
+        $(header).removeClass("fa-sort-asc").addClass("fa-sort-desc");
+        drawTable(store);
+    }
+    else {
+        sortDir = 'asc';
+        drawTable(store);
+        $(header).removeClass("fa-sort-desc").addClass("fa-sort-asc");
+    }
+};
+
+var cityHeaderClicked = function (){
+    sortField = 'name';
+    direction($('.arrows-city'));
+    $('.arrows-stars, .arrows-visited').removeClass("fa-sort-asc", "fa-sort-desc");
+};
+var starsHeaderClicked = function(){
+    sortField = 'stars';
+    direction($('.arrows-stars'));
+    $('.arrows-visited').removeClass("fa-sort-asc", "fa-sort-desc");
+    $('.arrows-city').removeClass("fa-sort-asc").addClass("fa-sort");
+};
+var visitedHeaderClicked = function(){
+    sortField = 'visited';
+    direction($('.arrows-visited'));
+    $('.arrows-stars').removeClass("fa-sort-asc", "fa-sort-desc");
+};
+var sortAll = function(){
+    $('#cityHeader').click(cityHeaderClicked);
+    $('#visitedHeader').click(visitedHeaderClicked);
+    $('#starsHeader').click(starsHeaderClicked);
+};
 $(document).ready(function() {
     $form.submit(onSubmit);
     $form.find('a.cancel').click(cancelClicked);
     $('[name="stele"]').stars();
     $('a.previous').click(prevClicked);
     $('a.next').click(nextClicked);
+    sortAll();
     drawTable(store);
 });
 

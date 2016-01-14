@@ -38,7 +38,7 @@
             <script type="text/html" id="tpl">
                 <tr data-id="<%=id%>">
                     <td><%=name%></td>
-                    <td id="stars"><%=stars%></td>
+                    <td><%=stars%></td>
                     <td><%=visited%></td>
                     <td>
                         <div class="btn-group" role="group">
@@ -52,16 +52,16 @@
               <table class="table table-bordered table-striped" id="the-table">
                   <thead>
                       <tr>
-                          <th>City <i class="fa fa-fw fa-sort-asc"></i></th>
-                          <th>Stars <i class="fa fa-fw fa-sort"></i></th>
-                          <th>Visited <i class="fa fa-fw fa-sort"></i></th>
+                          <th id="cityHeader">City <i class="fa fa-fw fa-sort-asc arrows-city"></i></th>
+                          <th id="starsHeader">Stars <i class="fa fa-fw fa-sort arrows-stars"></i></th>
+                          <th id="visitedHeader">Visited <i class="fa fa-fw fa-sort arrows-visited"></i></th>
                           <th></th>
                       </tr>
                   </thead>
                   <tbody>
                       <tr>
                           <td>Bucharest</td>
-                          <td id="stars">3</td>
+                          <td>3</td>
                           <td></td>
                           <td>
                               <div class="btn-group" role="group">

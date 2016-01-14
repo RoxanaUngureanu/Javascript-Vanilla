@@ -33,9 +33,11 @@ thead {
 #the-form.editing .editing{
     display:block;
 }
-/*----------------------LOADING SIGN---------------------------------*/
 #loading{
    width:70px;
     height:70px;
     float:right;
+}
+#cityHeader,#starsHeader,#visitedHeader {
+    cursor:pointer;
 }

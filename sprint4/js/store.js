@@ -1,27 +1,14 @@
 var store = (function () {
     // private
-
     var entriesUrl = "http://server.godev.ro:8080/api/roxanau/entries";
     var headers = {
         'Content-Type': 'application/json'
     };
 
-    var error = function(jqXHR){
-
-        if (jqXHR.status === 409){
-
-            alert(jqXHR.responseJSON.error);
-
-        } else {
-
-            alert("Error unknown");
-        }
-    };
-
     return {
-        getAll: function (page) {
+        getAll: function (page,sortField,sortDir) {
             return new Promise(function (resolve, reject) {
-                $.ajax(entriesUrl + "?page=" + page, {
+                $.ajax(entriesUrl+"?sortDir="+sortDir+"&sortField="+sortField+"&page="+page, {
                     type: 'GET',
                     headers: headers
                 }).done(function (data) {
