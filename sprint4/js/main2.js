@@ -108,19 +108,28 @@ var prevClicked = function() {
     return false;
 };
 
-var sortHeaders = function (){
+var sortHeaderClicked = function (){
+    $(this).find('i').removeClass("fa-sort-asc").addClass("fa-sort");
     sortField = $(this).data('field');
-    sortDir = $(this).data('dir');
-    if (sortDir = 'asc') {
-        sortDir = 'desc';
-        $(this).find('i').removeClass("fa-sort-desc").addClass("fa-sort-asc");
-        drawTable(store);
-    } else {
-        //sortDir = 'asc';
-        $(this).find('i').removeClass("fa-sort-asc").addClass("fa-sort-desc");
-        drawTable(store);
-        console.log('cevaaa')
-    }
+    //sortDir = $(this).data('dir');
+
+console.log(this)
+    drawTable(store);
+
+
+
+    //ternary operators in care selectez toate linkurile si intai le fac pe
+    // toate la fel sagetele si apoi ii setez sageata aleia pe care sunt
+    //if (sortDir == 'desc' && sortField) {
+    //    sortDir = 'desc';
+    //    $(this).find('i').removeClass("fa-sort").addClass("fa-sort-desc");
+    //    drawTable(store);
+    //} else if (sortDir == 'asc' && sortField){
+    //    sortDir = 'asc';
+    //    $(this).find('i').removeClass("fa-sort").addClass("fa-sort-asc");
+    //    drawTable(store);
+    //    console.log('cevaaa')
+    //}
 };
 
 var showGiphy = function(){
@@ -155,7 +164,7 @@ $(document).ready(function() {
     $('[name="stele"]').stars();
     $('a.previous').click(prevClicked);
     $('a.next').click(nextClicked);
-    $table.find('.sortable').click(sortHeaders);
+    $table.find('.sortable').click(sortHeaderClicked);
     drawTable(store);
 });
 
