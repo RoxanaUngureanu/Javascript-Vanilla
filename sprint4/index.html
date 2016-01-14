@@ -10,6 +10,10 @@
     <link rel="stylesheet" type="text/css"  href="css/main.css">
 </head>
 <body>
+    <div id="giphy">
+        <img id="giphy-img" src="" alt="Giphy is not working"/>
+        <span class="glyphicon glyphicon-remove-sign"></span>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-md-11">
@@ -37,7 +41,7 @@
             </div>
             <script type="text/html" id="tpl">
                 <tr data-id="<%=id%>">
-                    <td><%=name%></td>
+                    <td class="city-name"><%=name%></td>
                     <td><%=stars%></td>
                     <td><%=visited%></td>
                     <td>
@@ -52,15 +56,15 @@
               <table class="table table-bordered table-striped" id="the-table">
                   <thead>
                       <tr>
-                          <th id="cityHeader">City <i class="fa fa-fw fa-sort-asc arrows-city"></i></th>
-                          <th id="starsHeader">Stars <i class="fa fa-fw fa-sort arrows-stars"></i></th>
-                          <th id="visitedHeader">Visited <i class="fa fa-fw fa-sort arrows-visited"></i></th>
+                          <th class="sortable" data-field="name" data-dir="asc"><a href="#">City <i class="fa fa-fw fa-sort-asc"></i></a></th>
+                          <th class="sortable" data-field="stars" data-dir="asc"><a href="#">Stars <i class="fa fa-fw fa-sort"></i></a></th>
+                          <th class="sortable" data-field="visited" data-dir="asc"><a href="#">Visited <i class="fa fa-fw fa-sort"></i></a></th>
                           <th></th>
                       </tr>
                   </thead>
                   <tbody>
                       <tr>
-                          <td>Bucharest</td>
+                          <td class="city-name">Bucharest</td>
                           <td>3</td>
                           <td></td>
                           <td>

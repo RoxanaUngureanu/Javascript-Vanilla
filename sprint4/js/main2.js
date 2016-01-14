@@ -20,7 +20,6 @@ var drawTable = function(store) {
         $('#totalPages').text(totalPages);
         attachTableEvents();
     });
-
 };
 
 var onSubmit = function() {
@@ -31,17 +30,13 @@ var onSubmit = function() {
     };
 
     if (editingItem) {
-
         store.update(editingItem.id,formData).then(function() {
             $form.removeClass("editing");
             drawTable(store);
         });
-
     } else {
-
         store.add(formData).then(function() {
             drawTable(store);
-
         });
     }
     resetForm();
@@ -52,6 +47,7 @@ var onSubmit = function() {
 var attachTableEvents = function() {
     $tbody.find('a.delete').click(deleteClicked);
     $tbody.find('a.edit').click(editClicked);
+    showGiphy();
 };
 
 var deleteClicked = function() {
@@ -95,78 +91,72 @@ var resetForm = function (){
 };
 
 var nextClicked = function(){
+    if (page < totalPages) {
+        page++;
+        drawTable(store);
+    }
 
-            if (page < totalPages) {
-                page++;
-                drawTable(store);
-            }
-
-            return false;
+    return false;
 };
 
 var prevClicked = function() {
-
-        if (page > 1) {
-            page--;
-            drawTable(store);
-        }
-
-        return false;
-};
-var error = function(jqXHR){
-
-    if (jqXHR.status === 409){
-
-        alert(jqXHR.responseJSON.error);
-
-    } else {
-
-        alert("Error unknown");
+    if (page > 1) {
+        page--;
+        drawTable(store);
     }
+
+    return false;
 };
 
-var direction = function (header){
-
-    if (sortDir == 'asc') {
+var sortHeaders = function (){
+    sortField = $(this).data('field');
+    sortDir = $(this).data('dir');
+    if (sortDir = 'asc') {
         sortDir = 'desc';
-        $(header).removeClass("fa-sort-asc").addClass("fa-sort-desc");
+        $(this).find('i').removeClass("fa-sort-desc").addClass("fa-sort-asc");
         drawTable(store);
-    }
-    else {
-        sortDir = 'asc';
+    } else {
+        //sortDir = 'asc';
+        $(this).find('i').removeClass("fa-sort-asc").addClass("fa-sort-desc");
         drawTable(store);
-        $(header).removeClass("fa-sort-desc").addClass("fa-sort-asc");
+        console.log('cevaaa')
     }
 };
 
-var cityHeaderClicked = function (){
-    sortField = 'name';
-    direction($('.arrows-city'));
-    $('.arrows-stars, .arrows-visited').removeClass("fa-sort-asc", "fa-sort-desc");
+var showGiphy = function(){
+    $('.city-name').click(function(){
+        var cityName = $(this).closest("td").text();
+        console.log(cityName)
+    });
+
 };
-var starsHeaderClicked = function(){
-    sortField = 'stars';
-    direction($('.arrows-stars'));
-    $('.arrows-visited').removeClass("fa-sort-asc", "fa-sort-desc");
-    $('.arrows-city').removeClass("fa-sort-asc").addClass("fa-sort");
-};
-var visitedHeaderClicked = function(){
-    sortField = 'visited';
-    direction($('.arrows-visited'));
-    $('.arrows-stars').removeClass("fa-sort-asc", "fa-sort-desc");
-};
-var sortAll = function(){
-    $('#cityHeader').click(cityHeaderClicked);
-    $('#visitedHeader').click(visitedHeaderClicked);
-    $('#starsHeader').click(starsHeaderClicked);
-};
+
+//var getGiphy = function (id) {
+//    return new Promise(function (resolve, reject) {
+//        $.ajax(entriesUrl + "/" + id, {
+//            type: 'GET',
+//            headers: headers,
+//            data: JSON.stringify(id)
+//        }).done(function (data) {
+//            resolve(data);
+//        }).fail(error);
+//    });
+$(document).on("ajaxSend", function(){
+    $("#loading").show();
+    $("input").prop("disabled", true);
+}).on("ajaxComplete", function(){
+    $("input").prop("disabled", false);
+    $("#loading").hide();
+});
+
 $(document).ready(function() {
     $form.submit(onSubmit);
     $form.find('a.cancel').click(cancelClicked);
     $('[name="stele"]').stars();
     $('a.previous').click(prevClicked);
     $('a.next').click(nextClicked);
-    sortAll();
+    $table.find('.sortable').click(sortHeaders);
     drawTable(store);
 });
+
 

@@ -5,6 +5,18 @@ var store = (function () {
         'Content-Type': 'application/json'
     };
 
+    var error = function(jqXHR){
+
+        if (jqXHR.status === 409){
+
+            alert(jqXHR.responseJSON.error);
+
+        } else {
+
+            alert("Error unknown");
+        }
+    };
+
     return {
         getAll: function (page,sortField,sortDir) {
             return new Promise(function (resolve, reject) {
@@ -62,10 +74,3 @@ var store = (function () {
     };
 })();
 
-$(document).on("ajaxSend", function(){
-    $("#loading").show();
-    $("input").prop("disabled", true);
-}).on("ajaxComplete", function(){
-    $("input").prop("disabled", false);
-    $("#loading").hide();
-});
