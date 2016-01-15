@@ -26,7 +26,6 @@ var drawTable = function(store) {
                 visited: tableVisited
             }));
             $tbody.append(tr);
-
         });
         totalPages = data.totalPages;
         $('#page').text(page);
@@ -170,6 +169,7 @@ var showGiphy = function(){
         $('#giphy-img').removeAttr('src');
     });
 };
+
 $(document).on("ajaxSend", function(){
     $("#loading").show();
     $("input").prop("disabled", true);

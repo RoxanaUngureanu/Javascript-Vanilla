@@ -4,16 +4,13 @@ var store = (function () {
     var headers = {
         'Content-Type': 'application/json'
     };
-    var error = function(reject){
-     return function(jqXHR){
-
-        if (jqXHR.status === 409){
-            reject(jqXHR.responseJSON.error);
+    var error = function(jqXHR){
+        if (jqXHR.status == 409){
+            reject (jqXHR.responseJSON.error);
         } else {
             alert("Unknown error");
         }
      };
-    };
 
     return {
         getAll: function (page,sortField,sortDir) {
@@ -30,7 +27,7 @@ var store = (function () {
                     type: 'GET',
                     headers: headers,
                     data: JSON.stringify(id)
-                }).done(resolve).fail(error(reject));
+                }).done(resolve).fail(error);
             });
         },
         add: function (item) {
@@ -39,7 +36,7 @@ var store = (function () {
                         type: 'POST',
                         headers: headers,
                         data: JSON.stringify(item)
-                    }).done(resolve).fail(error(reject));
+                    }).done(resolve).fail(error);
             });
         },
         update: function (id, updateData) {
@@ -48,7 +45,7 @@ var store = (function () {
                     type: 'PUT',
                     headers: headers,
                     data: JSON.stringify(updateData)
-                }).done(resolve).fail(error(reject));
+                }).done(resolve).fail(error);
             });
         },
         delete: function (id) {
@@ -56,7 +53,7 @@ var store = (function () {
                 $.ajax(entriesUrl + "/" + id, {
                     type: 'DELETE',
                     headers: headers
-                }).done(resolve).fail(error(reject));
+                }).done(resolve).fail(error);
             });
         }
     };
