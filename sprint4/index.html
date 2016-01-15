@@ -12,7 +12,7 @@
 <body>
     <div id="giphy">
         <img id="giphy-img" src="" alt="Giphy is not working"/>
-        <span class="glyphicon glyphicon-remove-sign"></span>
+        <span class="glyphicon glyphicon-remove-sign close-giphy"></span>
     </div>
     <div class="container">
         <div class="row">
@@ -63,31 +63,31 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <tr>
-                          <td class="city-name">Bucharest</td>
-                          <td>3</td>
-                          <td></td>
-                          <td>
-                              <div class="btn-group" role="group">
-                                  <a href="#"  class="btn btn-default edit">Edit</a>
-                                  <a href="#" class="btn btn-default btn-danger delete">Delete</a>
-                              </div>
-                          </td>
-                      </tr>
+                      <!--<tr>-->
+                          <!--<td class="city-name">Bucharest</td>-->
+                          <!--<td>3</td>-->
+                          <!--<td></td>-->
+                          <!--<td>-->
+                              <!--<div class="btn-group" role="group">-->
+                                  <!--<a href="#"  class="btn btn-default edit">Edit</a>-->
+                                  <!--<a href="#" class="btn btn-default btn-danger delete">Delete</a>-->
+                              <!--</div>-->
+                          <!--</td>-->
+                      <!--</tr>-->
                   </tbody>
               </table>
+              <div class="col-md-12">
+                    <nav>
+                        <ul class="pagination pagination-centered">
+                            <li><a href="#" class="previous">Previous</a></li>
+                            <li class="active"><a href="#" id="page"></a></li>
+                            <li class="disabled"><a href="#">of</a></li>
+                            <li><a href="#" id="totalPages"></a></li>
+                            <li><a href="#" class="next">Next</a></li>
+                        </ul>
+                    </nav>
+              </div>
             </div>
-            <div class="col-md-6">
-                <nav>
-                    <ul class="pagination pagination-centered">
-                        <li><a href="#" class="previous">Previous</a></li>
-                        <li class="active"><a href="#" id="page"></a></li>
-                        <li class="disabled"><a href="#">of</a></li>
-                        <li><a href="#" id="totalPages"></a></li>
-                        <li><a href="#" class="next">Next</a></li>
-                    </ul>
-                </nav>
-               </div>
           </div>
         </div>
     <script src="https://code.jquery.com/jquery-2.1.4.js"></script>

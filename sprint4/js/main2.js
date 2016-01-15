@@ -11,9 +11,22 @@ var drawTable = function(store) {
 
     store.getAll(page,sortField,sortDir).then(function(data){
         $tbody.empty();
-        $.each(data.list, function() {
-            var tr = (tmpl("tpl", this));
+        $.each(data.list, function(index,element) {
+            var tableStars = "";
+            for (i = 1; i <= element.stars; i++) {
+                tableStars = tableStars + '<span class="star hover">★</span>';
+            }
+            var tableVisited = element.visited == 1?
+                '<span class="glyphicon glyphicon-ok"></span>':
+                '<span class="glyphicon glyphicon-remove"></span>';
+            var tr = (tmpl("tpl", {
+                id: element.id,
+                name: element.name,
+                stars: tableStars,
+                visited: tableVisited
+            }));
             $tbody.append(tr);
+
         });
         totalPages = data.totalPages;
         $('#page').text(page);
@@ -109,47 +122,54 @@ var prevClicked = function() {
 };
 
 var sortHeaderClicked = function (){
-    $(this).find('i').removeClass("fa-sort-asc").addClass("fa-sort");
+    $table.find('.sortable i')
+        .removeAttr("class")
+        .attr("class","fa fa-fw fa-sort");
     sortField = $(this).data('field');
-    //sortDir = $(this).data('dir');
 
-console.log(this)
+    if (sortDir == 'asc'){
+        sortDir = 'desc';
+        $(this).find('i')
+            .removeAttr("class")
+            .attr("class","fa fa-fw fa-sort-desc");
+    } else {
+        sortDir='asc';
+        $(this).find('i')
+            .removeAttr("class")
+            .attr("class","fa fa-fw fa-sort-asc");
+    }
     drawTable(store);
-
-
-
-    //ternary operators in care selectez toate linkurile si intai le fac pe
-    // toate la fel sagetele si apoi ii setez sageata aleia pe care sunt
-    //if (sortDir == 'desc' && sortField) {
-    //    sortDir = 'desc';
-    //    $(this).find('i').removeClass("fa-sort").addClass("fa-sort-desc");
-    //    drawTable(store);
-    //} else if (sortDir == 'asc' && sortField){
-    //    sortDir = 'asc';
-    //    $(this).find('i').removeClass("fa-sort").addClass("fa-sort-asc");
-    //    drawTable(store);
-    //    console.log('cevaaa')
-    //}
 };
 
 var showGiphy = function(){
     $('.city-name').click(function(){
         var cityName = $(this).closest("td").text();
-        console.log(cityName)
+        var giphyURL = "http://api.giphy.com/v1/gifs/search?q=";
+        var giphyKey = "&api_key=dc6zaTOxFJmzC";
+
+        $.get(giphyURL + cityName + giphyKey, {
+            }).done(function (data) {
+
+                if (data.data[0]){
+                    $('#giphy').show();
+                    $('#giphy-img')
+                        .attr('src',data.data[0].images.downsized.url);
+                }else{
+                    $('#giphy').show();
+                    $('#giphy-img')
+                        .attr('src','https://media.giphy.com/media/Rkis28kMJd1aE/giphy.gif');
+                    alert("Sorry, we didn't find any GIFs");
+                }
+            });
+
+            return false;
+        });
+
+    $(".close-giphy").click(function() {
+        $("#giphy").hide();
+        $('#giphy-img').removeAttr('src');
     });
-
 };
-
-//var getGiphy = function (id) {
-//    return new Promise(function (resolve, reject) {
-//        $.ajax(entriesUrl + "/" + id, {
-//            type: 'GET',
-//            headers: headers,
-//            data: JSON.stringify(id)
-//        }).done(function (data) {
-//            resolve(data);
-//        }).fail(error);
-//    });
 $(document).on("ajaxSend", function(){
     $("#loading").show();
     $("input").prop("disabled", true);

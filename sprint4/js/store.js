@@ -4,17 +4,15 @@ var store = (function () {
     var headers = {
         'Content-Type': 'application/json'
     };
-
-    var error = function(jqXHR){
+    var error = function(reject){
+     return function(jqXHR){
 
         if (jqXHR.status === 409){
-
-            alert(jqXHR.responseJSON.error);
-
+            reject(jqXHR.responseJSON.error);
         } else {
-
-            alert("Error unknown");
+            alert("Unknown error");
         }
+     };
     };
 
     return {
@@ -23,9 +21,7 @@ var store = (function () {
                 $.ajax(entriesUrl+"?sortDir="+sortDir+"&sortField="+sortField+"&page="+page, {
                     type: 'GET',
                     headers: headers
-                }).done(function (data) {
-                    resolve(data);
-                }).fail(error);
+                }).done(resolve).fail(error);
             });
         },
         get: function (id) {
@@ -34,9 +30,7 @@ var store = (function () {
                     type: 'GET',
                     headers: headers,
                     data: JSON.stringify(id)
-                }).done(function (data) {
-                    resolve(data);
-                }).fail(error);
+                }).done(resolve).fail(error(reject));
             });
         },
         add: function (item) {
@@ -45,9 +39,7 @@ var store = (function () {
                         type: 'POST',
                         headers: headers,
                         data: JSON.stringify(item)
-                    }).done(function (data) {
-                        resolve(data);
-                    }).fail(error);
+                    }).done(resolve).fail(error(reject));
             });
         },
         update: function (id, updateData) {
@@ -56,9 +48,7 @@ var store = (function () {
                     type: 'PUT',
                     headers: headers,
                     data: JSON.stringify(updateData)
-                }).done(function (data) {
-                    resolve(data);
-                }).fail(error);
+                }).done(resolve).fail(error(reject));
             });
         },
         delete: function (id) {
@@ -66,9 +56,7 @@ var store = (function () {
                 $.ajax(entriesUrl + "/" + id, {
                     type: 'DELETE',
                     headers: headers
-                }).done(function () {
-                    resolve();
-                }).fail(error);
+                }).done(resolve).fail(error(reject));
             });
         }
     };
