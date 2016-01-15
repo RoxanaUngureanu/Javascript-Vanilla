@@ -6,7 +6,7 @@ var store = (function () {
     };
     var error = function(jqXHR){
         if (jqXHR.status == 409){
-            reject (jqXHR.responseJSON.error);
+            alert (jqXHR.responseJSON.error);
         } else {
             alert("Unknown error");
         }
